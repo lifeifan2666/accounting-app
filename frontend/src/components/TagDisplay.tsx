@@ -12,7 +12,6 @@ export default function TagDisplay({ tags, size = 'normal' }: TagDisplayProps) {
 
   const fontSize = size === 'small' ? 10 : 11;
   const padding = size === 'small' ? '2px 6px' : '3px 8px';
-  const marginRight = size === 'small' ? 4 : 6;
 
   return (
     <div style={{

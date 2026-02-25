@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Toast } from 'antd-mobile';
-import { login } from '../api';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function Login() {
