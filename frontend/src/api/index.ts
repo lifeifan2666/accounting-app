@@ -27,7 +27,7 @@ import type {
 } from './types';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: '/api',
 });
 
 // 添加请求拦截器，自动添加token
