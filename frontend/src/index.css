@@ -1,0 +1,273 @@
+/* ========================================
+   记账本 - Modern Minimal Theme
+   ======================================== */
+
+/* CSS Variables - Design Tokens */
+:root {
+  /* Colors - Clean Modern */
+  --color-bg: #F7F8FA;
+  --color-bg-card: #FFFFFF;
+  --color-bg-elevated: #FFFFFF;
+
+  /* Expense - Modern Blue */
+  --color-expense: #5B8DEF;
+  --color-expense-light: #EEF3FF;
+  --color-expense-dark: #3D6BC7;
+
+  /* Income - Fresh Green */
+  --color-income: #52C41A;
+  --color-income-light: #F0FFE8;
+  --color-income-dark: #389E0D;
+
+  /* Accent - Purple */
+  --color-accent: #7B61FF;
+  --color-accent-light: #F0EBFF;
+
+  /* Neutrals */
+  --color-text-primary: #2D2D2D;
+  --color-text-secondary: #6B6B6B;
+  --color-text-tertiary: #9A9A9A;
+  --color-border: #F0EDE8;
+  --color-divider: #F5F2ED;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(45, 45, 45, 0.04);
+  --shadow-md: 0 4px 12px rgba(45, 45, 45, 0.06);
+  --shadow-lg: 0 8px 24px rgba(45, 45, 45, 0.08);
+  --shadow-xl: 0 12px 40px rgba(45, 45, 45, 0.12);
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Typography */
+  --font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-size-xs: 11px;
+  --font-size-sm: 13px;
+  --font-size-md: 15px;
+  --font-size-lg: 18px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 32px;
+  --font-size-3xl: 42px;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --color-bg: #0D0D0D;
+  --color-bg-card: #1A1A1A;
+  --color-bg-elevated: #252525;
+
+  /* Expense - Adjusted for dark mode */
+  --color-expense: #6B9FFF;
+  --color-expense-light: #1A2744;
+  --color-expense-dark: #4A7AE0;
+
+  /* Income - Adjusted for dark mode */
+  --color-income: #73D13D;
+  --color-income-light: #162312;
+  --color-income-dark: #52C41A;
+
+  /* Accent */
+  --color-accent: #9B8AFF;
+  --color-accent-light: #252244;
+
+  /* Neutrals - Dark */
+  --color-text-primary: #F5F5F5;
+  --color-text-secondary: #A0A0A0;
+  --color-text-tertiary: #6A6A6A;
+  --color-border: #333333;
+  --color-divider: #222222;
+
+  /* Shadows - More subtle in dark mode */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: #E8E4DD;
+  color: var(--color-text-primary);
+  line-height: 1.5;
+}
+
+[data-theme="dark"] body {
+  background-color: #0D0D0D;
+}
+
+#root {
+  max-width: 450px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  position: relative;
+  box-shadow: var(--shadow-xl);
+}
+
+/* Hide scrollbar */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Page Container */
+.page-container {
+  padding-bottom: 80px;
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Utility Classes */
+.fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+/* Skeleton Loading */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-divider) 25%,
+    var(--color-bg-card) 50%,
+    var(--color-divider) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* Card Base Style */
+.card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-md);
+}
+
+/* Button Styles */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-expense) 0%, var(--color-expense-dark) 100%);
+  color: white;
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 14px 28px;
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(232, 132, 107, 0.35);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 8px rgba(232, 132, 107, 0.25);
+}
+
+.btn-primary.income {
+  background: linear-gradient(135deg, var(--color-income) 0%, var(--color-income-dark) 100%);
+  box-shadow: 0 4px 14px rgba(107, 191, 138, 0.35);
+}
+
+/* Override antd-mobile styles */
+.adm-list-body {
+  background: transparent !important;
+  border: none !important;
+}
+
+.adm-list-item {
+  padding: 14px 16px !important;
+}
+
+.adm-list-item-content {
+  border-top: none !important;
+}
+
+.adm-list-item-content-prefix {
+  padding-right: 14px !important;
+}
+
+.adm-tab-bar-item {
+  color: var(--color-text-tertiary);
+}
+
+.adm-tab-bar-item-active {
+  color: var(--color-expense) !important;
+}
