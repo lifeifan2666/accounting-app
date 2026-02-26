@@ -141,7 +141,6 @@ export default function Accounts() {
                 marginBottom: 10,
                 boxShadow: 'var(--shadow-sm)',
               }}
-              onClick={() => handleDelete(acc.id)}
             >
               {/* Icon */}
               <div style={{
@@ -182,8 +181,25 @@ export default function Accounts() {
                 fontSize: 18,
                 fontWeight: 700,
                 color: 'var(--color-text-primary)',
+                marginRight: 12,
               }}>
                 ¥{acc.balance.toLocaleString('zh-CN', { minimumFractionDigits: 2 })}
+              </div>
+
+              {/* Delete Button */}
+              <div
+                onClick={() => handleDelete(acc.id)}
+                style={{
+                  padding: '8px 12px',
+                  background: 'var(--color-expense-light)',
+                  borderRadius: 10,
+                  color: 'var(--color-expense)',
+                  fontSize: 13,
+                  fontWeight: 500,
+                  cursor: 'pointer',
+                }}
+              >
+                删除
               </div>
             </div>
           );

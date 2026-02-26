@@ -11,20 +11,23 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
+    // 优先使用保存的主题
     const saved = localStorage.getItem('theme');
     if (saved === 'dark' || saved === 'light') {
       return saved;
     }
-    // 检测系统主题
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
-    }
+    // 默认使用浅色主题
     return 'light';
   });
 
   useEffect(() => {
     localStorage.setItem('theme', theme);
     document.documentElement.setAttribute('data-theme', theme);
+    // 更新 meta theme-color
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute('content', theme === 'dark' ? '#1A1A2E' : '#F7F8FA');
+    }
   }, [theme]);
 
   const toggleTheme = () => {
