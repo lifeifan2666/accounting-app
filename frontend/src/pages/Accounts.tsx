@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Dialog, Toast, Input, Button, Popup } from 'antd-mobile';
+import { Toast, Input, Button, Popup } from 'antd-mobile';
 import { getAccounts, createAccount, deleteAccount } from '../api';
 import type { Account } from '../api/types';
 import { useTheme } from '../contexts/ThemeContext';
@@ -57,20 +57,12 @@ export default function Accounts() {
   };
 
   const handleDelete = async (id: number) => {
-    try {
-      const result = await Dialog.confirm({
-        content: '确定删除此账户？删除后无法恢复。',
-        confirmText: '删除',
-        cancelText: '取消',
-      });
-      if (result) {
+    if (window.confirm('确定删除此账户？删除后无法恢复。')) {
+      try {
         await deleteAccount(id);
         Toast.show({ content: '删除成功', icon: 'success' });
         fetchAccounts();
-      }
-    } catch (error) {
-      // 用户取消不显示错误
-      if (error !== false) {
+      } catch {
         Toast.show({ content: '删除失败', icon: 'fail' });
       }
     }
