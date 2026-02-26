@@ -57,17 +57,20 @@ export default function Accounts() {
   };
 
   const handleDelete = async (id: number) => {
-    const result = await Dialog.confirm({
-      content: '确定删除此账户？',
-      confirmText: '删除',
-      cancelText: '取消',
-    });
-    if (result) {
-      try {
+    try {
+      const result = await Dialog.confirm({
+        content: '确定删除此账户？删除后无法恢复。',
+        confirmText: '删除',
+        cancelText: '取消',
+      });
+      if (result) {
         await deleteAccount(id);
         Toast.show({ content: '删除成功', icon: 'success' });
         fetchAccounts();
-      } catch {
+      }
+    } catch (error) {
+      // 用户取消不显示错误
+      if (error !== false) {
         Toast.show({ content: '删除失败', icon: 'fail' });
       }
     }
@@ -188,7 +191,10 @@ export default function Accounts() {
 
               {/* Delete Button */}
               <div
-                onClick={() => handleDelete(acc.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDelete(acc.id);
+                }}
                 style={{
                   padding: '8px 12px',
                   background: 'var(--color-expense-light)',
